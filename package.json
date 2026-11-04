@@ -1,0 +1,21 @@
+
+{
+  "name": "simulasi-proyektil",
+  "version": "1.0.0",
+  "description": "Aplikasi simulasi lintasan proyektil dengan hambatan udara menggunakan metode Euler Semi-Implisit",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
+

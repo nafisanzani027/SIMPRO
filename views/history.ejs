@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Riwayat Simulasi</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            color: #333;
+        }
+
+        nav {
+            background: #1e3a5f;
+            padding: 18px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: #1e3a5f;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        th, td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #eef4fa;
+            color: #1e3a5f;
+        }
+
+        tr:hover {
+            background: #f8fafc;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 7px;
+            text-decoration: none;
+            color: white;
+            background: #1e3a5f;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        .btn-secondary {
+            background: #64748b;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav a {
+                margin: 0 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <h2>Simulasi Proyektil</h2>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/form">Simulasi</a>
+            <a href="/history">Riwayat</a>
+        </div>
+    </nav>
+
+    <!-- KONTEN -->
+    <div class="container">
+
+        <div class="header">
+            <h1>Riwayat Simulasi</h1>
+
+            <p>
+                Daftar hasil simulasi lintasan proyektil
+                yang telah tersimpan dalam database.
+            </p>
+        </div>
+
+        <!-- TABEL RIWAYAT -->
+        <section class="card">
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Kecepatan Awal</th>
+                            <th>Sudut</th>
+                            <th>Jarak</th>
+                            <th>Tinggi Maksimum</th>
+                            <th>Waktu Terbang</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <% if (data.length === 0) { %>
+
+                            <tr>
+                                <td colspan="7" class="empty">
+                                    Belum ada riwayat simulasi.
+                                </td>
+                            </tr>
+
+                        <% } else { %>
+
+                            <% data.forEach((item, index) => { %>
+
+                                <tr>
+
+                                    <td>
+                                        <%= index + 1 %>
+                                    </td>
+
+                                    <td>
+                                        <%= new Date(item.createdAt).toLocaleString("id-ID") %>
+                                    </td>
+
+                                    <td>
+                                        <%= Number(item.v0).toFixed(2) %> m/s
+                                    </td>
+
+                                    <td>
+                                        <%= Number(item.theta).toFixed(2) %>°
+                                    </td>
+
+                                    <td>
+                                        <%= Number(item.jarak).toFixed(2) %> m
+                                    </td>
+
+                                    <td>
+                                        <%= Number(item.tinggi).toFixed(2) %> m
+                                    </td>
+
+                                    <td>
+                                        <%= Number(item.waktu).toFixed(2) %> s
+                                    </td>
+
+                                </tr>
+
+                            <% }); %>
+
+                        <% } %>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- NAVIGASI -->
+        <section class="card">
+
+            <div class="button-group">
+
+                <a href="/form" class="btn">
+                    Simulasi Baru
+                </a>
+
+                <a href="/" class="btn btn-secondary">
+                    Kembali ke Home
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        Simulasi Lintasan Proyektil dengan Hambatan Udara
+    </footer>
+
+</body>
+
+</html>
