@@ -1,4 +1,3 @@
-
 const express = require("express");
 const path = require("path");
 
@@ -15,44 +14,38 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Folder untuk file CSS, JavaScript, dan gambar
+// Folder file statis
 app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/", routes);
 
+// Test koneksi aplikasi
 app.get("/test", (req, res) => {
-    res.send("SIMULASI PROYEKTIL BERHASIL TERHUBUNG");
+    res.send("SIMPRO BERHASIL TERHUBUNG!");
 });
 
-// Port aplikasi
-const PORT = 3000;
+// Port untuk hosting
+const PORT = process.env.PORT || 3000;
 
 // Menjalankan server
 async function startServer() {
     try {
-        // Mengecek koneksi database
         await database.authenticate();
 
         console.log("Database berhasil terhubung!");
 
-        // Membuat tabel jika belum tersedia
         await database.sync();
 
         console.log("Database berhasil disinkronisasi!");
 
-        // Menjalankan aplikasi
-        app.listen(PORT, () => {
-            console.log(
-                `Server berjalan di http://localhost:${PORT}`
-            );
+        app.listen(PORT, "0.0.0.0", () => {
+            console.log(`SIMPRO berjalan di port ${PORT}`);
         });
 
     } catch (error) {
-        console.error(
-            "Gagal menjalankan aplikasi:",
-            error
-        );
+        console.error("Gagal menjalankan aplikasi:", error);
+        process.exit(1);
     }
 }
 
